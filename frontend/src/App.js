@@ -14,11 +14,13 @@ function App() {
     setQrSrc(null);
 
     try {
-      const response = await fetch("http://localhost:5000/generate-qr", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
-      });
+      const response = await fetch(
+  "https://qr-generator-z6yi.onrender.com/generate-qr",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url }),
+  });
 
       if (!response.ok) {
         throw new Error("Failed to generate QR");
