@@ -34,6 +34,16 @@ function App() {
     }
   };
 
+  const handleDownload = () => {
+    if (!qrSrc) return;
+    const link = document.createElement("a");
+    link.href = qrSrc;
+    link.download = "qr-code.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="app">
       <div className="card">
@@ -69,7 +79,16 @@ function App() {
 
         {qrSrc && (
           <div className="qr-wrapper">
-            <img src={qrSrc} alt="QR Code" className="qr-image" />
+            <div className="qr-content">
+              <img src={qrSrc} alt="QR Code" className="qr-image" />
+              <button
+                type="button"
+                className="button secondary"
+                onClick={handleDownload}
+              >
+                Download Image
+              </button>
+            </div>
           </div>
         )}
       </div>
