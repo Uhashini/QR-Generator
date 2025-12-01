@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -27,35 +28,51 @@ function App() {
       const imageUrl = URL.createObjectURL(blob);
       setQrSrc(imageUrl);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>QR Generator</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter URL"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          style={{ width: "300px", marginRight: "1rem" }}
-        />
-        <button type="submit" disabled={!url || loading}>
-          {loading ? "Generating..." : "Generate QR"}
-        </button>
-      </form>
+    <div className="app">
+      <div className="card">
+        <h1 className="title">QR Generator</h1>
+        <p className="subtitle">
+          Paste any URL and get an instant downloadable QR code.
+        </p>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="field-group">
+            <input
+              type="text"
+              placeholder="https://your-website.com"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="input"
+            />
+            <p className="helper-text">
+              Tip: Use a full URL including <code>https://</code>.
+            </p>
+          </div>
 
-      {qrSrc && (
-        <div style={{ marginTop: "2rem" }}>
-          <img src={qrSrc} alt="QR Code" />
-        </div>
-      )}
+          <button
+            type="submit"
+            className="button"
+            disabled={!url || loading}
+          >
+            {loading ? "Generating..." : "Generate QR"}
+          </button>
+
+          {error && <p className="error">{error}</p>}
+        </form>
+
+        {qrSrc && (
+          <div className="qr-wrapper">
+            <img src={qrSrc} alt="QR Code" className="qr-image" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
