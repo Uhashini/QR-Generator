@@ -1,6 +1,8 @@
 {
   "type": "module",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "inquirer": "^13.0.1",
     "qr-image": "^3.2.0",
     "qr-img": "^1.0.1"
@@ -8,8 +10,8 @@
   "name": "qr_generator",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
